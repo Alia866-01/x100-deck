@@ -9,7 +9,7 @@ FROM nginx:alpine
 RUN apk add --no-cache curl
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 COPY --from=build /app/dist /usr/share/nginx/html
-EXPOSE 3000
+EXPOSE 8090
 HEALTHCHECK --interval=10s --timeout=3s --start-period=5s --retries=3 \
-  CMD curl -f http://localhost:3000/health || exit 1
+  CMD curl -f http://localhost:8090/health || exit 1
 CMD ["nginx", "-g", "daemon off;"]
